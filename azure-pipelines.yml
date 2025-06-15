@@ -1,24 +1,12 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: Default
+  demands:
+  - agent.name -equals proyecto-redes-agent
 
 steps:
-# Paso 1: Clonar el repo (esto lo hace Azure automáticamente)
-
-# Paso 2: Instalar Docker
-- task: DockerInstaller@0
-  displayName: 'Instalar Docker'
-  inputs:
-    dockerVersion: '20.10.7'
-
-# Paso 3: Construir la imagen Docker
 - script: |
     docker build -t proyectoredes2:latest .
   displayName: 'Construir imagen Docker'
